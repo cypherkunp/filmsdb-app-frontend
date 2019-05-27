@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import Table from './common/table';
 import Like from './common/like';
 
@@ -7,7 +9,11 @@ class MoviesTable extends Component {
     const { movies, sortColumn, onSort, onLike, onDelete } = this.props;
 
     const columnData = [
-      { name: 'Title', path: 'title' },
+      {
+        name: 'Title',
+        path: 'title',
+        content: movie => <Link to={`movies/${movie['_id']}`}>{movie.title}</Link>
+      },
       { name: 'Genre', path: 'genre.name' },
       { name: 'Stock', path: 'numberInStock' },
       { name: 'Rate', path: 'dailyRentalRate' },
