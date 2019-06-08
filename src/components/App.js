@@ -5,7 +5,7 @@ import './App.css';
 
 import Movies from './movie';
 import NavBar from './navbar';
-import Home from './home';
+import Login from './login';
 import Customers from './customers';
 import Rentals from './rentals';
 import PageNotFound from './error/page-not-found';
@@ -20,11 +20,11 @@ class App extends Component {
           <Switch>
             <Route path="/movies/:id" component={MovieDetails} />
             <Route path="/movies" component={Movies} />
-            <Route path="/home" component={Home} />
+            <Route path="/login" component={Login} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/page-not-found" component={PageNotFound} />
-            <Redirect from="/" exact to="/home" />
+            <Redirect from="/" exact to="/login" />
             <Redirect to="/page-not-found" />
           </Switch>
         </main>
