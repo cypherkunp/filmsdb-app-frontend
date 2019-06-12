@@ -1,19 +1,18 @@
 import React from 'react';
 import Joi from 'joi-browser';
-import InputField from './common/input-field';
+
 import Form from './common/form';
+import InputField from './common/input-field';
 
-class LoginForm extends Form {
-  username = React.createRef();
-
+class Register extends Form {
   state = {
     data: {
       username: '',
       password: '',
+      fullName: ''
     },
-    errors: {},
+    errors: {}
   };
-
   schema = {
     username: Joi.string()
       .required()
@@ -25,6 +24,9 @@ class LoginForm extends Form {
       .min(8)
       .max(30)
       .label('Password'),
+    fullName: Joi.string()
+      .required()
+      .label('Full Name')
   };
 
   doSubmit = e => {
@@ -32,14 +34,13 @@ class LoginForm extends Form {
     // Server logics
     console.log('Submitted..');
   };
-
   render() {
     const { data, errors } = this.state;
     return (
       <div id="login-form">
         <div className="card">
           <div className="card-body">
-            <h3 className="card-title">Login</h3>
+            <h3 className="card-title">Register</h3>
             <form onSubmit={this.doSubmit}>
               <InputField
                 autoFocus="true"
@@ -67,7 +68,18 @@ class LoginForm extends Form {
                 value={data.password}
                 onChange={this.handleChange}
               />
-              {this.renderButton('Login')}
+
+              <InputField
+                autoFocus="false"
+                type="text"
+                name="fullName"
+                placeholder="Full Name"
+                label="Full Name"
+                error={errors.fullName}
+                value={data.fullName}
+                onChange={this.handleChange}
+              />
+              {this.renderButton('Register')}
             </form>
           </div>
         </div>
@@ -76,4 +88,4 @@ class LoginForm extends Form {
   }
 }
 
-export default LoginForm;
+export default Register;

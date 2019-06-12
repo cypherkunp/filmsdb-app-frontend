@@ -10,6 +10,7 @@ import Customers from './customers';
 import Rentals from './rentals';
 import PageNotFound from './error/page-not-found';
 import MovieDetails from './movie-details';
+import Register from './register';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
+            <Route path="/register" component={Register} />
             <Route path="/page-not-found" component={PageNotFound} />
             <Redirect from="/" exact to="/login" />
             <Redirect to="/page-not-found" />
