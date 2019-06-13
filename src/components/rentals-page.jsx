@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-class Rentals extends Component {
+class RentalsPage extends Component {
   render() {
     return <h1>Rentals Page</h1>;
   }
 }
 
-export default Rentals;
+export default RentalsPage;

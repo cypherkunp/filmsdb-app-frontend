@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 
 class InputField extends Component {
   render() {
-    const {
-      name,
-      type,
-      label,
-      value,
-      placeholder,
-      error,
-      autoFocus,
-      onChange,
-    } = this.props;
+    const { name, type, label, value, placeholder, error, autoFocus, onChange } = this.props;
     return (
       <div className="form-group">
         <label htmlFor={name}>{label}</label>

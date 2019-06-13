@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-class Customers extends Component {
+class CustomersPage extends Component {
   render() {
     return <h1>Customer Page</h1>;
   }
 }
 
-export default Customers;
+export default CustomersPage;

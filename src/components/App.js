@@ -3,14 +3,15 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 
 import './App.css';
 
-import Movies from './movie';
+import MoviesPage from './movie-page';
 import NavBar from './navbar';
-import Login from './login';
-import Customers from './customers';
-import Rentals from './rentals';
+import LoginPage from './login-page';
 import PageNotFound from './error/page-not-found';
 import MovieDetails from './movie-details';
-import Register from './register';
+import CustomersPage from './customers-page';
+import RegistrationPage from './registration-page';
+import RentalsPage from './rentals-page';
+import NewMoviePage from './new-movie-page';
 
 class App extends Component {
   render() {
@@ -19,12 +20,13 @@ class App extends Component {
         <NavBar />
         <main className="container m-5">
           <Switch>
+            <Route path="/movies/new" component={NewMoviePage} />
             <Route path="/movies/:id" component={MovieDetails} />
-            <Route path="/movies" component={Movies} />
-            <Route path="/login" component={Login} />
-            <Route path="/customers" component={Customers} />
-            <Route path="/rentals" component={Rentals} />
-            <Route path="/register" component={Register} />
+            <Route path="/movies" component={MoviesPage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/customers" component={CustomersPage} />
+            <Route path="/rentals" component={RentalsPage} />
+            <Route path="/register" component={RegistrationPage} />
             <Route path="/page-not-found" component={PageNotFound} />
             <Redirect from="/" exact to="/login" />
             <Redirect to="/page-not-found" />

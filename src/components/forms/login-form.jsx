@@ -1,18 +1,20 @@
 import React from 'react';
 import Joi from 'joi-browser';
 
-import Form from './common/form';
-import InputField from './common/input-field';
+import InputField from '../common/input-field';
+import Form from './form';
 
-class Register extends Form {
+class LoginForm extends Form {
+  username = React.createRef();
+
   state = {
     data: {
       username: '',
-      password: '',
-      fullName: ''
+      password: ''
     },
     errors: {}
   };
+
   schema = {
     username: Joi.string()
       .required()
@@ -20,13 +22,9 @@ class Register extends Form {
       .label('Username'),
     password: Joi.string()
       .required()
-      .alphanum()
       .min(8)
       .max(30)
-      .label('Password'),
-    fullName: Joi.string()
-      .required()
-      .label('Full Name')
+      .label('Password')
   };
 
   doSubmit = e => {
@@ -34,13 +32,14 @@ class Register extends Form {
     // Server logics
     console.log('Submitted..');
   };
+
   render() {
     const { data, errors } = this.state;
     return (
       <div id="login-form">
         <div className="card">
           <div className="card-body">
-            <h3 className="card-title">Register</h3>
+            <h3 className="card-title">Login</h3>
             <form onSubmit={this.doSubmit}>
               <InputField
                 autoFocus="true"
@@ -52,11 +51,7 @@ class Register extends Form {
                 error={errors.username}
                 aria-describedby="usernameHelp"
                 onChange={this.handleChange}
-              >
-                <small id="usernameHelp" className="form-text text-muted">
-                  We'll never share your email with anyone else.
-                </small>
-              </InputField>
+              ></InputField>
 
               <InputField
                 autoFocus="false"
@@ -68,18 +63,7 @@ class Register extends Form {
                 value={data.password}
                 onChange={this.handleChange}
               />
-
-              <InputField
-                autoFocus="false"
-                type="text"
-                name="fullName"
-                placeholder="Full Name"
-                label="Full Name"
-                error={errors.fullName}
-                value={data.fullName}
-                onChange={this.handleChange}
-              />
-              {this.renderButton('Register')}
+              {this.renderButton('Login')}
             </form>
           </div>
         </div>
@@ -88,4 +72,4 @@ class Register extends Form {
   }
 }
 
-export default Register;
+export default LoginForm;

@@ -8,8 +8,9 @@ import { paginate } from '../utilities/paginate';
 import Pagination from './common/pagination';
 import ListGroup from './common/list-group';
 import MoviesTable from './movies-table';
+import AlertBox from './common/alert-box';
 
-class Movies extends Component {
+class MoviesPage extends Component {
   state = {
     movies: [],
     genres: [],
@@ -62,42 +63,67 @@ class Movies extends Component {
   };
 
   render() {
-    const { genres, pageSize, currentPage, sortColumn, selectedGenre } = this.state;
-
+    const {
+      genres,
+      pageSize,
+      currentPage,
+      sortColumn,
+      selectedGenre,
+      movies: allMovies
+    } = this.state;
     const { totalCount, data: movies } = this.getPagedData();
+    let message = '';
 
-    if (totalCount === 0) return <p>There are no movies in the database.</p>;
+    if (totalCount === 0) message = `There are no movies in the database.`;
+    else
+      message = `Showing ${allMovies.length} ${
+        allMovies.length === 1 ? 'movie' : 'movies'
+      } from the database.`;
 
     return (
-      <div className="row">
-        <div className="col-2">
-          <ListGroup
-            itemList={genres}
-            selectedItem={selectedGenre}
-            onItemSelect={this.handleGenreSelect}
-          />
-        </div>
-        <div className="col">
-          <div className="alert alert-dark" role="alert">
-            Showing {this.state.movies.length} movies in the database.
+      <React.Fragment>
+        <div className="row">
+          <div className="col-2">
+            <center>
+              <button
+                onClick={() => this.props.history.push('/movies/new')}
+                className="btn btn-primary"
+              >
+                Add Movie
+              </button>
+            </center>
           </div>
-          <MoviesTable
-            movies={movies}
-            sortColumn={sortColumn}
-            onSort={this.handleSort}
-            onDelete={this.handleMovieDelete}
-            onLike={this.handleLike}
-          />
-          <Pagination
-            itemsCount={totalCount}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChange={this.handlePageChange}
-          />
+          <div className="col">
+            <AlertBox message={message} />
+          </div>
         </div>
-      </div>
+        <div className="row">
+          <div className="col-2">
+            <ListGroup
+              itemList={genres}
+              selectedItem={selectedGenre}
+              onItemSelect={this.handleGenreSelect}
+            />
+          </div>
+          <div className="col">
+            <MoviesTable
+              movies={movies}
+              sortColumn={sortColumn}
+              onSort={this.handleSort}
+              onDelete={this.handleMovieDelete}
+              onLike={this.handleLike}
+            />
+            <Pagination
+              itemsCount={totalCount}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
 }
 
-export default Movies;
+export default MoviesPage;
